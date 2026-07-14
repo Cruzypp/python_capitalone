@@ -29,29 +29,20 @@ def best_support_streak(scores: list[int], window_size: int) -> int:
         Can you describe a brute-force alternative first?
     """
 
-    # TODO: Implement the solution.
-
-    windowCount = 0
-    currCount = 0
-    best = 0
+    if window_size <= 0:
+        raise ValueError("window_size must be positive")
 
     if len(scores) < window_size:
         return 0
 
-    windowCycles = len(scores) - window_size + 1
+    max_sum = sum(scores[:window_size])
+    curr_sum = max_sum
+    window_cycles = len(scores) - window_size + 1
 
-    for i in range(windowCycles):
+    for i in range(1, window_cycles):
+        curr_sum = curr_sum - scores[i - 1] + scores[window_size + i - 1]
 
-        if i == 0:
-            windowCount = currCount = sum(scores[0:window_size])
-            continue
+        if curr_sum > max_sum:
+            max_sum = curr_sum
 
-        currCount = currCount - scores[i-1] + scores[window_size+i-1]
-
-        if currCount > windowCount:
-             windowCount = currCount
-
-        
-    return windowCount
-
-    raise NotImplementedError
+    return max_sum

@@ -6,6 +6,7 @@ def pair_with_target_spend(prices: list[int], target: int) -> bool:
     Return True when two sorted prices sum to the target amount.
 
     Args:
+
     prices: Sorted prices.
     target: Desired combined amount.
 
@@ -30,4 +31,18 @@ def pair_with_target_spend(prices: list[int], target: int) -> bool:
     """
 
     # TODO: Implement the solution.
+
+    seen = set()
+    found = False
+
+    for price in prices:
+        second = target - price
+        if second in seen:
+            found = True
+        else:
+            seen.add(price)
+
+    return found
+
+
     raise NotImplementedError

@@ -29,5 +29,20 @@ def count_close_transfers(amounts: list[int], threshold: int) -> int:
         Can you describe a brute-force alternative first?
     """
 
+    pairsAmount = 0
+    i = 0
+    left = 0
+
+    for right in range(len(amounts)):
+        while amounts[right] - amounts[left] > threshold:
+            left += 1
+
+        pairsAmount += right - left
+
+    return pairsAmount
+
+
+
+
     # TODO: Implement the solution.
     raise NotImplementedError

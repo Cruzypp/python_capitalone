@@ -29,5 +29,28 @@ def longest_budget_stretch(expenses: list[int], budget: int) -> int:
         Can you describe a brute-force alternative first?
     """
 
+    count = 0
+    left = 0
+    maxWindow = 0
+
+    for right, expense in enumerate(expenses):
+        count += expense
+
+        while count > budget and left < right:
+            count -= expenses[left]
+            left += 1
+
+        currWindow = right - left + 1
+        if currWindow > maxWindow:
+            maxWindow = currWindow
+
+    
+    return maxWindow
+
+        
+        
+
+
+
     # TODO: Implement the solution.
     raise NotImplementedError
